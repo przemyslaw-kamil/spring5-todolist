@@ -28,4 +28,10 @@ public class ItemTest {
         assertEquals(details, item.getDetails());
         assertEquals(item,item.getDetails().getItem());
     }
+
+    @Test
+    public void getDetails(){
+
+        assertNotNull(item.getDetails());
+    }
 }

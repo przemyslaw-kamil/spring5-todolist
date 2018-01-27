@@ -4,14 +4,16 @@ import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String description;
     private LocalDate deadline;
+//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
 
     @OneToOne(cascade = CascadeType.ALL)
     private Details details;
@@ -27,7 +29,16 @@ public class Item {
         }
     }
 
-    public long getId() {
+    public Details getDetails() {
+        if(details==null){
+            this.details= new Details();
+            details.setItem(this);
+        }
+        return details;
+    }
+
+
+    public Long getId() {
         return id;
     }
 
@@ -35,11 +46,9 @@ public class Item {
         return description;
     }
 
-    public Details getDetails() {
-        return details;
-    }
 
-    public void setId(long id) {
+
+    public void setId(Long id) {
         this.id = id;
     }
 
