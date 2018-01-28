@@ -1,6 +1,7 @@
 package com.przemyslaw_kamil.todolist.bootstrap;
 
 
+import com.przemyslaw_kamil.todolist.domain.ColorProject;
 import com.przemyslaw_kamil.todolist.domain.Item;
 import com.przemyslaw_kamil.todolist.repositories.ItemRepository;
 import org.springframework.context.ApplicationListener;
@@ -37,6 +38,7 @@ public class ItemBootstrap implements ApplicationListener<ContextRefreshedEvent>
         item1.setDescription("My first to do item");
         item1.getDetails().setNotes("I should do something");
         item1.setDeadline(LocalDate.of(2017,12,25));
+        item1.setColorProject(ColorProject.Blue);
 
 
         Item item2 = new Item ();
@@ -49,7 +51,7 @@ public class ItemBootstrap implements ApplicationListener<ContextRefreshedEvent>
         item3.setDescription("My next to do item");
         item3.getDetails().setNotes("I should do something");
         item3.setDeadline(LocalDate.of(2018,1,10));
-
+        item1.setColorProject(ColorProject.Green);
         //add to return list
         items.add(item1);
         items.add(item2);
