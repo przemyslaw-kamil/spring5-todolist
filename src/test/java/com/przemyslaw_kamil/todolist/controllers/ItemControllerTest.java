@@ -28,10 +28,13 @@ public class ItemControllerTest {
     @Mock
     ItemService itemService;
 
+    MockMvc mockMvc;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
    itemController= new ItemController(itemService);
+        mockMvc = MockMvcBuilders.standaloneSetup(itemController).build();
     }
 
     @Test
@@ -43,7 +46,6 @@ public class ItemControllerTest {
 
         //when
         when(itemService.findItemById(anyLong())).thenReturn(item);
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(itemController).build();
 
         //then
         mockMvc.perform(get("/item/1/show"))
@@ -52,7 +54,22 @@ public class ItemControllerTest {
                 .andExpect(model().attributeExists("items"))
                 .andExpect(model().attributeExists("item"));
 
+    }
+
+    @Test
+    public void editItem() throws Exception {
+        //given
+        Item item = new Item();
+        item.setId(1L);
+
+        //when
+
+        //then
 
 
+
+   mockMvc.perform(get("/item/1/edit"))
+           .andExpect(status().isOk())
+           .andExpect(view().name("item/edit"));
     }
 }
