@@ -1,10 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8"/>
+    <title>To Do Item List Home</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"
+
+    ></script>
 </head>
 <body>
 
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form th:object="${item}" th:action="@{/item/}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="pannel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-10">
+                                <h1 class="panel-title">To Do List</h1>
+                                </div>
+
+                                <!--<div class="col-md-1">-->
+                                    <!--<a class="btn btn-default" href="#"-->
+                                       <!--th:href="@{'/item/' + ${item.id} + '/edit'}" role="button">Edit</a>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label>Description: </label>
+                                    <input type="text" class="form-control" th:field="*{description}"/>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Project:</label>
+                                    <select class="form-control" th:field="*{colorProject}">
+                                        <option th:each="color : ${T(com.przemyslaw_kamil.todolist.domain.ColorProject).values()}"
+
+                                                th:value="${color.toString()}"
+                                                th:text="${color.toString()}"
+                                        >Easy
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Deadline </label>
+
+                                    <div class="input-group date" data-provide="datepicker">
+
+                                        <input th:value="*{deadline}" type="text" class="form-control">
+
+
+                                        <div class="input-group-addon">  <span class="glyphicon glyphicon-th"></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Details</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <textarea class="form-control" rows="3"
+                                                  th:field="${item.details.notes}">Notes  (...)</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
