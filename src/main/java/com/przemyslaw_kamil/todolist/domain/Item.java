@@ -21,6 +21,9 @@ public class Item {
     @Enumerated(value = EnumType.STRING)
     private ColorProject colorProject;
 
+    public Item() {
+        this.colorProject = ColorProject.none;
+    }
 
     public void setDetails(Details details) {
         if (details != null) {
