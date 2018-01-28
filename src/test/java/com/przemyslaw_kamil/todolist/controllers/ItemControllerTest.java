@@ -46,7 +46,7 @@ public class ItemControllerTest {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(itemController).build();
 
         //then
-        mockMvc.perform(get("item/1/show"))
+        mockMvc.perform(get("/item/1/show"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("item/show"))
                 .andExpect(model().attributeExists("items"))
