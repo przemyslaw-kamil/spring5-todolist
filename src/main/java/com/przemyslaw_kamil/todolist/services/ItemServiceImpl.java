@@ -17,17 +17,18 @@ public class ItemServiceImpl implements ItemService {
     private final ItemToItemCommand itemToItemCommand;
     private final ItemCommandToItem itemCommandToItem;
 
-    public ItemServiceImpl(ItemRepository itemRepository, ItemToItemCommand itemToItemCommand, ItemCommandToItem itemCommandToItem) {
+    public ItemServiceImpl(ItemRepository itemRepository, ItemToItemCommand itemToItemCommand,
+                           ItemCommandToItem itemCommandToItem) {
         this.itemRepository = itemRepository;
         this.itemToItemCommand = itemToItemCommand;
         this.itemCommandToItem = itemCommandToItem;
     }
 
     @Override
-    public Set<Item> getItems() {
+    public Set <Item> getItems() {
 
-        Set<Item> itemSet = new HashSet <>();
-       itemRepository.findAll().forEach(itemSet::add);
+        Set <Item> itemSet = new HashSet <>();
+        itemRepository.findAll().forEach(itemSet::add);
         return itemSet;
     }
 
@@ -39,6 +40,13 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemCommand findCommandById(Long id) {
 
-       return itemToItemCommand.convert(findItemById(id));
+        return itemToItemCommand.convert(findItemById(id));
+    }
+
+    @Override
+    public ItemCommand saveItemCommand(ItemCommand command) {
+        Item detachedItem = itemCommandToItem.convert(command);
+        Item savedItem = itemRepository.save(detachedItem);
+        return itemToItemCommand.convert(savedItem);
     }
 }

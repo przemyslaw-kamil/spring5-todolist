@@ -23,12 +23,17 @@ public class ItemServiceImplTest {
     @Mock
     ItemRepository itemRepository;
 
+    ItemCommandToItem itemCommandToItem;
+    ItemToItemCommand itemToItemCommand;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        itemService=new ItemServiceImpl(itemRepository,new ItemToItemCommand(), new ItemCommandToItem());
+        itemCommandToItem = new ItemCommandToItem();
+        itemToItemCommand = new ItemToItemCommand();
 
 
+        itemService = new ItemServiceImpl(itemRepository, itemToItemCommand, itemCommandToItem);
     }
 
     @Test
@@ -40,7 +45,7 @@ public class ItemServiceImplTest {
         //given
         Item item = new Item();
         item.setId(1L);
-        Optional<Item> itemOptional = Optional.of(item);
+        Optional <Item> itemOptional = Optional.of(item);
 
         //when
         when(itemRepository.findById(anyLong())).thenReturn(itemOptional);
@@ -53,11 +58,11 @@ public class ItemServiceImplTest {
     }
 
     @Test
-    public void findCommandByIdTest() throws Exception{
+    public void findCommandByIdTest() throws Exception {
         //given
         Item item = new Item();
         item.setId(1L);
-        Optional<Item> itemOptional = Optional.of(item);
+        Optional <Item> itemOptional = Optional.of(item);
 
         //when
         when(itemRepository.findById(1L)).thenReturn(Optional.of(item));
@@ -69,4 +74,39 @@ public class ItemServiceImplTest {
 
     }
 
+    @Test
+    public void saveItemCommand() {
+        //given
+        Item item = new Item();
+        item.setDescription("description");
+        item.setId(15L);
+
+        //when
+        when(itemRepository.save(any())).thenReturn(item);
+        ItemCommand itemCommand = itemService.saveItemCommand(itemToItemCommand.convert(item));
+
+        //then
+        assertNotNull(itemCommand);
+        assertEquals(itemCommand.getDescription(), item.getDescription());
+        assertEquals(itemCommand.getId(), item.getId());
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -11,5 +11,6 @@ public interface ItemService {
     Set<Item> getItems();
     Item findItemById(Long id);
     ItemCommand findCommandById(Long id);
+    ItemCommand saveItemCommand(ItemCommand command);
 
 }

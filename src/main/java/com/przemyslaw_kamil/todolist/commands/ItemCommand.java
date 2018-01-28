@@ -43,6 +43,9 @@ public class ItemCommand {
     }
 
     public Details getDetails() {
+        if (details==null){
+            details=new Details();
+        }
         return details;
     }
 
