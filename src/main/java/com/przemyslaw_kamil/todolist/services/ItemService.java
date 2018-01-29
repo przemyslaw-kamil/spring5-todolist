@@ -12,5 +12,6 @@ public interface ItemService {
     Item findItemById(Long id);
     ItemCommand findCommandById(Long id);
     ItemCommand saveItemCommand(ItemCommand command);
+    void deleteById(Long id);
 
 }

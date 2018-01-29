@@ -41,4 +41,11 @@ public class ItemController {
         return "item/edit";
     }
 
+    @GetMapping("item/{id}/delete")
+    public String deleteItem (@PathVariable String id, Model model){
+       itemService.deleteById(Long.valueOf(id));
+        return "redirect:/";
+
+    }
+
 }

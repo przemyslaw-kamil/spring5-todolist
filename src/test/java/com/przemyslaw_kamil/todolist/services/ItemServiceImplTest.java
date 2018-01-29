@@ -87,7 +87,18 @@ public class ItemServiceImplTest {
         assertNotNull(itemCommand);
         assertEquals(itemCommand.getDescription(), item.getDescription());
         assertEquals(itemCommand.getId(), item.getId());
+    }
 
+    @Test
+    public void deleteItemById(){
+        //given
+        Long idToDelete = Long.valueOf(2L);
+
+        //when
+        itemService.deleteById(idToDelete);
+
+        //then
+        verify(itemRepository, times(1)).deleteById(anyLong());
     }
 }
 

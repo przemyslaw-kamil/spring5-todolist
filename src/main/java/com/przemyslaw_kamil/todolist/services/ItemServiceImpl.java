@@ -50,4 +50,9 @@ public class ItemServiceImpl implements ItemService {
         Item savedItem = itemRepository.save(detachedItem);
         return itemToItemCommand.convert(savedItem);
     }
+
+    @Override
+    public void deleteById(Long idToDelete) {
+        itemRepository.deleteById(idToDelete);
+    }
 }

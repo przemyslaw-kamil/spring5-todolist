@@ -97,5 +97,13 @@ public class ItemControllerTest {
                 .andExpect(model().attributeExists("item"));
     }
 
+    @Test
+    public void deleteItem() throws Exception{
+
+        mockMvc.perform(get("/item/1/delete"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/"));
+    }
+
 
 }
