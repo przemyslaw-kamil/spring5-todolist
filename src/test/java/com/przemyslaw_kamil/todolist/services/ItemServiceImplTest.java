@@ -32,7 +32,6 @@ public class ItemServiceImplTest {
         itemCommandToItem = new ItemCommandToItem();
         itemToItemCommand = new ItemToItemCommand();
 
-
         itemService = new ItemServiceImpl(itemRepository, itemToItemCommand, itemCommandToItem);
     }
 
@@ -71,7 +70,6 @@ public class ItemServiceImplTest {
         //then
         assertNotNull("itemCommand is null", itemCommand);
         assertEquals(Long.valueOf(1L), itemCommand.getId());
-
     }
 
     @Test

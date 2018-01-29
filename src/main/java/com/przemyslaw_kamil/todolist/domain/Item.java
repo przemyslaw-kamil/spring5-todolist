@@ -1,10 +1,9 @@
 package com.przemyslaw_kamil.todolist.domain;
 
-import org.hibernate.annotations.ManyToAny;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Item {
@@ -12,8 +11,9 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadline;
-//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
 
     @OneToOne(cascade = CascadeType.ALL)
     private Details details;
@@ -33,8 +33,8 @@ public class Item {
     }
 
     public Details getDetails() {
-        if(details==null){
-            this.details= new Details();
+        if (details == null) {
+            this.details = new Details();
             details.setItem(this);
         }
         return details;
@@ -49,8 +49,6 @@ public class Item {
         return description;
     }
 
-
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -59,16 +57,8 @@ public class Item {
         this.description = description;
     }
 
-    public void setDeadline(LocalDate deadline) {
-        this.deadline = deadline;
-    }
-
     public void setColorProject(ColorProject colorProject) {
         this.colorProject = colorProject;
-    }
-
-    public LocalDate getDeadline() {
-        return deadline;
     }
 
     public ColorProject getColorProject() {
@@ -77,6 +67,14 @@ public class Item {
 
     public void setProject(String color) {
         this.colorProject = ColorProject.valueOf(color);
+    }
+
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
 
 }

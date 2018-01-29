@@ -6,6 +6,7 @@ import com.przemyslaw_kamil.todolist.converters.ItemToItemCommand;
 import com.przemyslaw_kamil.todolist.domain.Item;
 import com.przemyslaw_kamil.todolist.repositories.ItemRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,10 +40,10 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemCommand findCommandById(Long id) {
-
         return itemToItemCommand.convert(findItemById(id));
     }
 
+    @Transactional
     @Override
     public ItemCommand saveItemCommand(ItemCommand command) {
         Item detachedItem = itemCommandToItem.convert(command);

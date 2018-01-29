@@ -26,7 +26,7 @@ public class ItemCommandToItemTest {
         ItemCommand source = new ItemCommand();
             source.setId(1L);
             source.setColorProject(ColorProject.Blue);
-            source.setDeadline(LocalDate.of(2018,01,28));
+//            source.setDeadline(LocalDate.of(2018,01,28));
             source.getDetails().setNotes("Notes");
             source.setDescription("Description");
 

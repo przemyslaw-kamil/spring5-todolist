@@ -11,11 +11,12 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Created by jt on 6/13/17.
  */
 @Component
-public class ItemBootstrap implements ApplicationListener<ContextRefreshedEvent> {
+public class ItemBootstrap implements ApplicationListener <ContextRefreshedEvent> {
 
     private final ItemRepository itemRepository;
 
@@ -29,28 +30,28 @@ public class ItemBootstrap implements ApplicationListener<ContextRefreshedEvent>
 
     }
 
-    private List<Item> getItems() {
+    private List <Item> getItems() {
 
-        List<Item> items = new ArrayList<>();
+        List <Item> items = new ArrayList <>();
 
         //
-        Item item1 = new Item ();
+        Item item1 = new Item();
         item1.setDescription("My first to do item");
         item1.getDetails().setNotes("I should do something");
-        item1.setDeadline(LocalDate.of(2017,12,25));
+        item1.setDeadline(LocalDate.of(2017, 12, 25));
         item1.setColorProject(ColorProject.Blue);
 
 
-        Item item2 = new Item ();
+        Item item2 = new Item();
         item2.setDescription("My second to do item");
         item2.getDetails().setNotes("I should do something");
-        item2.setDeadline(LocalDate.of(2018,1,12));
+        item2.setDeadline(LocalDate.of(2018, 1, 12));
 
 
-        Item item3 = new Item ();
+        Item item3 = new Item();
         item3.setDescription("My next to do item");
         item3.getDetails().setNotes("I should do something");
-        item3.setDeadline(LocalDate.of(2018,1,10));
+        item3.setDeadline(LocalDate.of(2018, 1, 10));
         item1.setColorProject(ColorProject.Green);
         //add to return list
         items.add(item1);

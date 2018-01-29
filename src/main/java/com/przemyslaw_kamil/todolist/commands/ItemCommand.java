@@ -2,18 +2,22 @@ package com.przemyslaw_kamil.todolist.commands;
 
 import com.przemyslaw_kamil.todolist.domain.ColorProject;
 import com.przemyslaw_kamil.todolist.domain.Details;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Component
 public class ItemCommand {
     private Long id;
     private String description;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadline;
-//    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
     private Details details;
     private ColorProject colorProject;
-
 
     public ItemCommand() {
     }
@@ -34,17 +38,9 @@ public class ItemCommand {
         this.description = description;
     }
 
-    public LocalDate getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(LocalDate deadline) {
-        this.deadline = deadline;
-    }
-
     public Details getDetails() {
-        if (details==null){
-            details=new Details();
+        if (details == null) {
+            details = new Details();
         }
         return details;
     }
@@ -59,5 +55,13 @@ public class ItemCommand {
 
     public void setColorProject(ColorProject colorProject) {
         this.colorProject = colorProject;
+    }
+
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
 }
